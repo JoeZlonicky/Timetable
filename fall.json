@@ -1,0 +1,34 @@
+{
+  "AHVS 311E" : {
+    "time" : ["11:30", "12:50"],
+    "days" : ["Monday", "Thursday"]
+  },
+  "CSC 106" : {
+    "time" : ["14:30", "15:50"],
+    "days" : ["Tuesday", "Friday"]
+  },
+  "CSC 106 Lab" : {
+    "time" : ["12:30", "13:20"],
+    "days" : ["Tuesday"]
+  },
+  "CSC 110" : {
+    "time" : ["9:30", "10:20"],
+    "days" : ["Tuesday", "Wednesday", "Friday"]
+  },
+  "CSC 110 Lab" : {
+    "time" : ["16:30", "18:20"],
+    "days" : ["Monday"]
+  },
+  "ENGL 135" : {
+    "time" : ["11:30", "12:20"],
+    "days" : ["Tuesday", "Wednesday", "Friday"]
+  },
+  "MATH 100" : {
+    "time" : ["14:30", "15:20"],
+    "days" : ["Monday", "Wednesday", "Thursday"]
+  },
+  "MATH 100 Tutorial" : {
+    "time" : ["13:00", "13:50"],
+    "days" : ["Monday"]
+  }
+}

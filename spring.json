@@ -1,0 +1,34 @@
+{
+    "ASTR 101" : {
+        "time" : ["11:30", "12:20"],
+        "days" : ["Tuesday", "Wednesday", "Friday"]
+    },
+    "ASTR 101 Lab" : {
+        "time" : ["18:30", "21:20"],
+        "days" : ["Wednesday"]
+    },
+    "CSC 115" : {
+        "time" : ["11:30", "12:50"],
+        "days" : ["Monday", "Thursday"]
+    },
+    "CSC 115 Lab" : {
+        "time" : ["15:30", "17:20"],
+        "days" : ["Tuesday"]
+    },
+    "GMST 101" : {
+        "time" : ["9:30", "10:20"],
+        "days" : ["Tuesday", "Wednesday", "Friday"]
+    },
+    "MATH 101" : {
+        "time" : ["12:30", "13:20"],
+        "days" : ["Tuesday", "Wednesday", "Friday"]
+    },
+    "MATH 101 Tutorial" : {
+        "time" : ["15:30", "16:20"],
+        "days" : ["Monday"]
+    },
+    "MATH 122" : {
+        "time" : ["14:30", "15:20"],
+        "days" : ["Monday", "Wednesday", "Thursday"]
+    }
+}
