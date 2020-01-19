@@ -17,7 +17,7 @@ class Day:
     """ Holds classes for the day and calculates how many hour of classes """
 
     def __init__(self, name, class_list):
-        """ Create an empty day of given name """
+        """ Create an day of given name and add relevent classes from class_list"""
         self.name = name
         self.classes = []
         self.class_time_h = 0
@@ -43,7 +43,7 @@ class Day:
 
 
 class UniversityClass:
-    """ An enrolled class """
+    """ An enrolled class with a start and end time """
 
     def __init__(self, name, json_data):
         """ Create a class of given name and get class times from json_data """
@@ -88,24 +88,25 @@ class UniversityClass:
 
 
 class DayColumn:
-    width = 220
-    height = 600
-    title_y = 20
-    hour_y = 525
-    minute_y = 550
-    font_size = 32
-    separation = 20
-    border_color = (89, 193, 53)
-    border_width = 4
-    background_color = (51, 57, 65)
+    """ A graphical box representing a day that holds the class boxes and displays total hours of classes """
+    WIDTH = 220
+    HEIGHT = 600
+    TITLE_Y = 20
+    HOUR_Y = 525
+    MINUTE_Y = 550
+    FONT_SIZE = 32
+    SEPARATION = 20
+    BORDER_COLOR = (89, 193, 53)
+    BORDER_WIDTH = 4
+    BACKGROUND_COLOR = (51, 57, 65)
 
     def __init__(self, day):
-        """ A graphical box representing a day that holds the class boxes and displays total hours of classes """
+        """  Create image from given day """
         self.day = day
         self.class_slots = []
         for university_class in self.day.classes:
             self.class_slots.append(ClassSlot(university_class))
-        self.image = pygame.Surface((self.width, self.height))
+        self.image = pygame.Surface((self.WIDTH, self.HEIGHT))
         self.create_image()
 
     def create_image(self):
@@ -116,8 +117,8 @@ class DayColumn:
 
     def draw_box(self):
         """ Draw the box containing everything """
-        self.image.fill(self.background_color)
-        pygame.draw.rect(self.image, self.border_color, self.image.get_rect(), self.border_width)
+        self.image.fill(self.BACKGROUND_COLOR)
+        pygame.draw.rect(self.image, self.BORDER_COLOR, self.image.get_rect(), self.BORDER_WIDTH)
         
 
     def draw_classes(self):
@@ -125,33 +126,34 @@ class DayColumn:
         y = 60
         for class_slot in self.class_slots:
             self.image.blit(class_slot.image, (center_x(class_slot.image, self.image), y))
-            y += class_slot.image.get_height() + self.separation
+            y += class_slot.image.get_height() + self.SEPARATION
 
     def draw_labels(self):
         """ Draw the title label and hours/minutes """
-        title_label = create_label(self.day.name, self.font_size)
-        self.image.blit(title_label, (center_x(title_label, self.image), self.title_y))
+        title_label = create_label(self.day.name, self.FONT_SIZE)
+        self.image.blit(title_label, (center_x(title_label, self.image), self.TITLE_Y))
 
-        hour_label = create_label(str(self.day.class_time_h) + " hours", self.font_size)
-        minute_label = create_label(str(self.day.class_time_m) + " minutes", self.font_size)
-        self.image.blit(hour_label, (center_x(hour_label, self.image), self.hour_y))
-        self.image.blit(minute_label, (center_x(minute_label, self.image), self.minute_y))
+        hour_label = create_label(str(self.day.class_time_h) + " hours", self.FONT_SIZE)
+        minute_label = create_label(str(self.day.class_time_m) + " minutes", self.FONT_SIZE)
+        self.image.blit(hour_label, (center_x(hour_label, self.image), self.HOUR_Y))
+        self.image.blit(minute_label, (center_x(minute_label, self.image), self.MINUTE_Y))
 
 
 class ClassSlot:
-    width = 190
-    height = 70
-    font_size = 22
-    background_color = (36, 34, 52)
-    border_color = (89, 193, 53)
-    border_width = 4
-    title_y = 14
-    time_y = 40
+    """ A graphical box that shows info about a class """
+    WIDTH = 190
+    HEIGHT = 70
+    FONT_SIZE = 22
+    BACKGROUND_COLOR = (36, 34, 52)
+    BORDER_COLOR = (89, 193, 53)
+    BORDER_WIDTH = 4
+    TITLE_Y = 14
+    TIME_Y = 40
 
     def __init__(self, university_class):
-        """ A graphical box that shows info about a class """
+        """ Create image from given class """
         self.university_class = university_class
-        self.image = pygame.Surface((self.width, self.height))
+        self.image = pygame.Surface((self.WIDTH, self.HEIGHT))
         self.create_image()
     
     def create_image(self):
@@ -161,15 +163,15 @@ class ClassSlot:
 
     def draw_box(self):
         """ Draw the box containing the info """
-        self.image.fill(self.background_color)
-        pygame.draw.rect(self.image, self.border_color, self.image.get_rect(), self.border_width)
+        self.image.fill(self.BACKGROUND_COLOR)
+        pygame.draw.rect(self.image, self.BORDER_COLOR, self.image.get_rect(), self.BORDER_WIDTH)
 
     def draw_labels(self):
         """ Draw the class name and time labels """
-        class_label = create_label(self.university_class.name, self.font_size)
-        time_label = create_label(self.format_class_time(), self.font_size)
-        self.image.blit(class_label, (center_x(class_label, self.image), self.title_y))
-        self.image.blit(time_label, (center_x(time_label, self.image), self.time_y))
+        class_label = create_label(self.university_class.name, self.FONT_SIZE)
+        time_label = create_label(self.format_class_time(), self.FONT_SIZE)
+        self.image.blit(class_label, (center_x(class_label, self.image), self.TITLE_Y))
+        self.image.blit(time_label, (center_x(time_label, self.image), self.TIME_Y))
 
     def format_class_time(self):
         """ Put time in format of hh:mm - hh:mm """
@@ -177,22 +179,23 @@ class ClassSlot:
 
 
 class TimeTable:
-    week_days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
-    day_separation = 20
-    total_width = len(week_days) * DayColumn.width + (len(week_days) - 1) * day_separation
-    top = 20
-    font_size = 32
-    hour_y  = 650
-    minute_y = 675
-    background_color = (36, 34, 52)
-    line_color = (255, 255, 255)
-    line_edge_offset = 20
-    line_center_offset = 100
-    line_top = hour_y - 10
-    line_y = minute_y
+    """ A graphical display of a week-long timetable """
+    WEEK_DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+    DAY_SEPARATION = 20
+    TOTAL_WIDTH = len(WEEK_DAYS) * DayColumn.WIDTH + (len(WEEK_DAYS) - 1) * DAY_SEPARATION
+    TOP = 20
+    FONT_SIZE = 32
+    HOUR_Y  = 650
+    MINUTE_Y = 675
+    BACKGROUND_COLOR = (36, 34, 52)
+    LINE_COLOR = (255, 255, 255)
+    LINE_EDGE_OFFSET = 20
+    LINE_CENTER_OFFSET = 100
+    LINE_TOP = HOUR_Y - 10
+    LINE_Y = MINUTE_Y
 
     def __init__(self, file_path):
-        """ A graphical display of a week-long timetable created from a json file """
+        """ Create a timetable from json file """
         self.classes = []
         self.days = []
         self.total_h = 0
@@ -210,7 +213,7 @@ class TimeTable:
 
     def load_days(self):
         """ Create and fill Day's from list of week days """
-        for name in self.week_days:
+        for name in self.WEEK_DAYS:
             self.days.append(Day(name, self.classes))
 
     def calculate_total_time(self):
@@ -230,42 +233,42 @@ class TimeTable:
         self.draw_lines(screen)
 
     def fill_background(self, screen):
-        """ Fill the background of the screen with background_color """
-        screen.fill(self.background_color)
+        """ Fill the background of the screen with BACKGROUND_COLOR """
+        screen.fill(self.BACKGROUND_COLOR)
 
     def draw_days(self, screen):
         """ Draw all the day columns """
-        x = int(screen.get_width() / 2 - self.total_width / 2)
-        y = self.top
+        x = int(screen.get_width() / 2 - self.TOTAL_WIDTH / 2)
+        y = self.TOP
         for day in self.days:
             day_column = DayColumn(day)
             screen.blit(day_column.image, (x, y))
-            x += DayColumn.width + self.day_separation
+            x += DayColumn.WIDTH + self.DAY_SEPARATION
 
     def draw_labels(self, screen):
         """ Draw the hour and minute labels """
-        hour_label = create_label(str(self.total_h) + " hours", self.font_size)
-        minute_label = create_label(str(self.total_m) + " minutes", self.font_size)
-        screen.blit(hour_label, (center_x(hour_label, screen), self.hour_y))
-        screen.blit(minute_label, (center_x(minute_label, screen), self.minute_y))
+        hour_label = create_label(str(self.total_h) + " hours", self.FONT_SIZE)
+        minute_label = create_label(str(self.total_m) + " minutes", self.FONT_SIZE)
+        screen.blit(hour_label, (center_x(hour_label, screen), self.HOUR_Y))
+        screen.blit(minute_label, (center_x(minute_label, screen), self.MINUTE_Y))
 
     def draw_lines(self, screen):
         """ Draw the encapsulating lines """
-        line_offset = int(self.total_width / 2 - self.line_edge_offset)
+        line_offset = int(self.TOTAL_WIDTH / 2 - self.LINE_EDGE_OFFSET)
         left_x = int(screen.get_width() / 2 - line_offset)
         right_x = int(screen.get_width() / 2 + line_offset)
-        inner_left_x = int(screen.get_width() / 2 - self.line_center_offset)
-        inner_right_x = int(screen.get_width() / 2 + self.line_center_offset)
-        left_points = [(left_x, self.line_top), (left_x, self.line_y), (inner_left_x, self.minute_y)]
-        right_points = [(right_x, self.line_top), (right_x, self.line_y), (inner_right_x, self.line_y)]
+        inner_left_x = int(screen.get_width() / 2 - self.LINE_CENTER_OFFSET)
+        inner_right_x = int(screen.get_width() / 2 + self.LINE_CENTER_OFFSET)
+        left_points = [(left_x, self.LINE_TOP), (left_x, self.LINE_Y), (inner_left_x, self.MINUTE_Y)]
+        right_points = [(right_x, self.LINE_TOP), (right_x, self.LINE_Y), (inner_right_x, self.LINE_Y)]
 
-        pygame.draw.lines(screen, self.line_color, False, left_points, 2)
-        pygame.draw.lines(screen, self.line_color, False, right_points, 2)
+        pygame.draw.lines(screen, self.LINE_COLOR, False, left_points, 2)
+        pygame.draw.lines(screen, self.LINE_COLOR, False, right_points, 2)
 
 
-def create_label(text, font_size, color=(255, 255, 255)):
+def create_label(text, FONT_SIZE, color=(255, 255, 255)):
     """ Render text of given size """
-    font = pygame.font.SysFont("Consolas", font_size)
+    font = pygame.font.SysFont("Consolas", FONT_SIZE)
     return font.render(text, True, color)
     
 
